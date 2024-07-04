@@ -9,10 +9,11 @@ export default function TableHeader() {
         />
       </div>
       <div className="mt-4 flex md:ml-4 md:mt-0">
-        <select className="select select-primary w-full max-w-xs">
-          <option disabled selected>
-            What is the best TV show?
-          </option>
+        <select
+          className="select select-primary w-full max-w-xs"
+          defaultValue="What is the best TV show?"
+        >
+          <option>What is the best TV show?</option>
           <option>Game of Thrones</option>
           <option>Lost</option>
           <option>Breaking Bad</option>
