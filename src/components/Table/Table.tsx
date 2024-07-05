@@ -1,6 +1,6 @@
 'use client';
 
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronDoubleDownIcon, ChevronDoubleUpIcon } from '@heroicons/react/24/solid';
 import TableHeader from './TableHeader';
 
@@ -71,22 +71,7 @@ export default function Table() {
       <table className="table-md table">
         <thead>
           <tr>
-            <th>
-              ID{' '}
-              <button
-                type="button"
-                onClick={() => {
-                  setSortAsc(switchDirection(sortAsc));
-                  setSortCriterion('id');
-                }}
-              >
-                {sortAsc ? (
-                  <ChevronDoubleUpIcon className="text-primary size-4 pt-1" />
-                ) : (
-                  <ChevronDoubleDownIcon className="text-primary size-4 pt-1" />
-                )}
-              </button>
-            </th>
+            <th>ID</th>
             <th>
               NAME{' '}
               <button
