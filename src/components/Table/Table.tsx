@@ -8,68 +8,181 @@ interface FakeData {
   [key: string]: any;
 }
 
-function getFakeData(seed: number, size: number, sortBy: string | null) {
-  return fetch(`${process.env.NEXT_URL}/api/data`, {
-    method: 'POST',
-    body: JSON.stringify({ seed, size, sortBy }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => data);
+function getUniqueCities(data: FakeData[]): string[] {
+  const citySet: Set<string> = new Set();
+
+  data.forEach((item) => {
+    if (item.city) {
+      citySet.add(item.city);
+    }
+  });
+
+  return Array.from(citySet);
+}
+
+function switchDirection(sortDirection: boolean) {
+  return !sortDirection;
 }
 
 export default function Table() {
-  // const fakeData: FakeData[] = await getFakeData(123, 10, 'state');
-  // const header = Object.keys(fakeData[0]);
   const [data, setData] = useState<FakeData[] | null>(null);
   const [header, setHeader] = useState<string[]>([]);
   const [isLoading, setLoading] = useState(true);
-  const [sortDirection, setSortDirection] = useState(true);
+  const [sortAsc, setSortAsc] = useState(true);
+  const [sortCriterion, setSortCriterion] = useState<string | null>(null);
+  const [states, setStateStates] = useState<string[]>([]);
+  const [selectStates, setSelectStates] = useState<string | null>(null);
 
   useEffect(() => {
     fetch('/api/data', {
       method: 'POST',
-      body: JSON.stringify({ seed: 123, size: 10, sortBy: 'state' }),
+      body: JSON.stringify({
+        seed: 123,
+        size: 100,
+        sortBy: sortCriterion,
+        sortAsc: sortAsc,
+        filterByState: selectStates,
+      }),
       headers: {
         'Content-Type': 'application/json',
       },
     })
       .then((res) => res.json())
       .then((data) => {
-        setData(data);
-        setHeader(Object.keys(data[0]));
+        setData(data.data);
+        setHeader(Object.keys(data.data[0]));
         setLoading(false);
+        setStateStates(data.states);
       })
       .catch((error) => {
         console.error('Error:', error);
       });
-  }, []);
-
-  // if (isLoading) return <p>Loading...</p>;
-  // if (!data) return <p>No profile data</p>;
+  }, [sortAsc, selectStates]);
 
   return isLoading ? (
     <p>Loading...</p>
   ) : (
     <div className="my-6 overflow-x-auto border p-6">
-      <TableHeader />
+      <TableHeader
+        states={states}
+        selectStates={selectStates || undefined}
+        setStateStates={setSelectStates}
+      />
       <table className="table-md table">
         <thead>
           <tr>
-            {header.map((key, index) => (
-              <th key={index}>
-                {key.toUpperCase()}
-                <button>
-                  {sortDirection ? (
-                    <ChevronDoubleUpIcon className="text-primary size-4 pt-1" />
-                  ) : (
-                    <ChevronDoubleDownIcon className="text-primary size-4 pt-1" />
-                  )}
-                </button>
-              </th>
-            ))}
+            <th>
+              ID{' '}
+              <button
+                type="button"
+                onClick={() => {
+                  setSortAsc(switchDirection(sortAsc));
+                  setSortCriterion('id');
+                }}
+              >
+                {sortAsc ? (
+                  <ChevronDoubleUpIcon className="text-primary size-4 pt-1" />
+                ) : (
+                  <ChevronDoubleDownIcon className="text-primary size-4 pt-1" />
+                )}
+              </button>
+            </th>
+            <th>
+              NAME{' '}
+              <button
+                type="button"
+                onClick={() => {
+                  setSortAsc(switchDirection(sortAsc));
+                  setSortCriterion('name');
+                }}
+              >
+                {sortAsc ? (
+                  <ChevronDoubleUpIcon className="text-primary size-4 pt-1" />
+                ) : (
+                  <ChevronDoubleDownIcon className="text-primary size-4 pt-1" />
+                )}
+              </button>
+            </th>
+            <th>
+              EMAIL{' '}
+              <button
+                type="button"
+                onClick={() => {
+                  setSortAsc(switchDirection(sortAsc));
+                  setSortCriterion('email');
+                }}
+              >
+                {sortAsc ? (
+                  <ChevronDoubleUpIcon className="text-primary size-4 pt-1" />
+                ) : (
+                  <ChevronDoubleDownIcon className="text-primary size-4 pt-1" />
+                )}
+              </button>
+            </th>
+            <th>
+              JOB{' '}
+              <button
+                type="button"
+                onClick={() => {
+                  setSortAsc(switchDirection(sortAsc));
+                  setSortCriterion('job');
+                }}
+              >
+                {sortAsc ? (
+                  <ChevronDoubleUpIcon className="text-primary size-4 pt-1" />
+                ) : (
+                  <ChevronDoubleDownIcon className="text-primary size-4 pt-1" />
+                )}
+              </button>
+            </th>
+            <th>
+              ADDRESS{' '}
+              <button
+                type="button"
+                onClick={() => {
+                  setSortAsc(switchDirection(sortAsc));
+                  setSortCriterion('address');
+                }}
+              >
+                {sortAsc ? (
+                  <ChevronDoubleUpIcon className="text-primary size-4 pt-1" />
+                ) : (
+                  <ChevronDoubleDownIcon className="text-primary size-4 pt-1" />
+                )}
+              </button>
+            </th>
+            <th>
+              CITY{' '}
+              <button
+                type="button"
+                onClick={() => {
+                  setSortAsc(switchDirection(sortAsc));
+                  setSortCriterion('city');
+                }}
+              >
+                {sortAsc ? (
+                  <ChevronDoubleUpIcon className="text-primary size-4 pt-1" />
+                ) : (
+                  <ChevronDoubleDownIcon className="text-primary size-4 pt-1" />
+                )}
+              </button>
+            </th>
+            <th>
+              STATE{' '}
+              <button
+                type="button"
+                onClick={() => {
+                  setSortAsc(switchDirection(sortAsc));
+                  setSortCriterion('state');
+                }}
+              >
+                {sortAsc ? (
+                  <ChevronDoubleUpIcon className="text-primary size-4 pt-1" />
+                ) : (
+                  <ChevronDoubleDownIcon className="text-primary size-4 pt-1" />
+                )}
+              </button>
+            </th>
           </tr>
         </thead>
         <tbody>
