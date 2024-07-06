@@ -22,8 +22,8 @@ export default function RootLayout({
         <link rel="icon" href="/table.svg" />
       </head>
       <body className={inter.className}>
+        <Navbar />
         <div className="container mx-auto">
-          <Navbar />
           <main className="mx-16 h-full max-w-6xl sm:px-6 lg:px-8">{children}</main>
         </div>
       </body>
