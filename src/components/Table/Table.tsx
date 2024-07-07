@@ -60,7 +60,9 @@ export default function Table() {
   }, [sortAsc, selectStates]);
 
   return isLoading ? (
-    <p>Loading...</p>
+    <div className="flex h-screen items-center justify-center">
+      <p className="loading loading-dots loading-lg text-success">Loading </p>
+    </div>
   ) : (
     <div className="my-6 overflow-x-auto border p-6">
       <TableHeader
@@ -68,7 +70,7 @@ export default function Table() {
         selectStates={selectStates || undefined}
         setStateStates={setSelectStates}
       />
-      <table className="table-md table">
+      <table className="table table-md">
         <thead>
           <tr>
             <th>ID</th>
@@ -82,9 +84,9 @@ export default function Table() {
                 }}
               >
                 {sortAsc ? (
-                  <ChevronDoubleUpIcon className="text-primary size-4 pt-1" />
+                  <ChevronDoubleUpIcon className="size-4 pt-1 text-primary" />
                 ) : (
-                  <ChevronDoubleDownIcon className="text-primary size-4 pt-1" />
+                  <ChevronDoubleDownIcon className="size-4 pt-1 text-primary" />
                 )}
               </button>
             </th>
@@ -98,9 +100,9 @@ export default function Table() {
                 }}
               >
                 {sortAsc ? (
-                  <ChevronDoubleUpIcon className="text-primary size-4 pt-1" />
+                  <ChevronDoubleUpIcon className="size-4 pt-1 text-primary" />
                 ) : (
-                  <ChevronDoubleDownIcon className="text-primary size-4 pt-1" />
+                  <ChevronDoubleDownIcon className="size-4 pt-1 text-primary" />
                 )}
               </button>
             </th>
@@ -114,9 +116,9 @@ export default function Table() {
                 }}
               >
                 {sortAsc ? (
-                  <ChevronDoubleUpIcon className="text-primary size-4 pt-1" />
+                  <ChevronDoubleUpIcon className="size-4 pt-1 text-primary" />
                 ) : (
-                  <ChevronDoubleDownIcon className="text-primary size-4 pt-1" />
+                  <ChevronDoubleDownIcon className="size-4 pt-1 text-primary" />
                 )}
               </button>
             </th>
@@ -130,9 +132,9 @@ export default function Table() {
                 }}
               >
                 {sortAsc ? (
-                  <ChevronDoubleUpIcon className="text-primary size-4 pt-1" />
+                  <ChevronDoubleUpIcon className="size-4 pt-1 text-primary" />
                 ) : (
-                  <ChevronDoubleDownIcon className="text-primary size-4 pt-1" />
+                  <ChevronDoubleDownIcon className="size-4 pt-1 text-primary" />
                 )}
               </button>
             </th>
@@ -146,9 +148,9 @@ export default function Table() {
                 }}
               >
                 {sortAsc ? (
-                  <ChevronDoubleUpIcon className="text-primary size-4 pt-1" />
+                  <ChevronDoubleUpIcon className="size-4 pt-1 text-primary" />
                 ) : (
-                  <ChevronDoubleDownIcon className="text-primary size-4 pt-1" />
+                  <ChevronDoubleDownIcon className="size-4 pt-1 text-primary" />
                 )}
               </button>
             </th>
@@ -162,9 +164,9 @@ export default function Table() {
                 }}
               >
                 {sortAsc ? (
-                  <ChevronDoubleUpIcon className="text-primary size-4 pt-1" />
+                  <ChevronDoubleUpIcon className="size-4 pt-1 text-primary" />
                 ) : (
-                  <ChevronDoubleDownIcon className="text-primary size-4 pt-1" />
+                  <ChevronDoubleDownIcon className="size-4 pt-1 text-primary" />
                 )}
               </button>
             </th>
