@@ -8,18 +8,6 @@ interface FakeData {
   [key: string]: any;
 }
 
-function getUniqueCities(data: FakeData[]): string[] {
-  const citySet: Set<string> = new Set();
-
-  data.forEach((item) => {
-    if (item.city) {
-      citySet.add(item.city);
-    }
-  });
-
-  return Array.from(citySet);
-}
-
 function switchDirection(sortDirection: boolean) {
   return !sortDirection;
 }
